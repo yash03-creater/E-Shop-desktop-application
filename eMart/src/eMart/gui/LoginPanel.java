@@ -26,7 +26,7 @@ public class LoginPanel extends javax.swing.JFrame {
     public LoginPanel() {
         initComponents();
         this.setLocationRelativeTo(this);
-        this.setResizable(false);
+        this.setResizable(false); 
     }
 
     /**
