@@ -26,6 +26,8 @@ DefaultTableModel tm;
      */
     public UpdateItem() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
         view();
     }
 

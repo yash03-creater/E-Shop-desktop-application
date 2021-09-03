@@ -31,6 +31,8 @@ public class UpdateReceptionist extends javax.swing.JFrame {
     String repwd;
     public UpdateReceptionist() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
         loadId();
     }
 

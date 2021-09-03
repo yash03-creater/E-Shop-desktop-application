@@ -5,6 +5,8 @@
  */
 package eMart.gui;
 
+import eMart.pojo.ProfilePojo;
+
 /**
  *
  * @author Acer
@@ -16,6 +18,9 @@ public class ReceptionistPanel extends javax.swing.JFrame {
      */
     public ReceptionistPanel() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
+        lblName.setText(ProfilePojo.getUserName());
     }
 
     /**
@@ -35,7 +40,7 @@ public class ReceptionistPanel extends javax.swing.JFrame {
         btnBill = new javax.swing.JButton();
         btnOrders = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,6 +52,11 @@ public class ReceptionistPanel extends javax.swing.JFrame {
         btnLogout.setBackground(new java.awt.Color(255, 0, 0));
         btnLogout.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -73,11 +83,21 @@ public class ReceptionistPanel extends javax.swing.JFrame {
         btnBill.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnBill.setForeground(new java.awt.Color(240, 240, 240));
         btnBill.setText("Billing Section");
+        btnBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBillActionPerformed(evt);
+            }
+        });
 
         btnOrders.setBackground(new java.awt.Color(204, 0, 0));
         btnOrders.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnOrders.setForeground(new java.awt.Color(240, 240, 240));
         btnOrders.setText("View Orders");
+        btnOrders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdersActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -104,6 +124,9 @@ public class ReceptionistPanel extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(240, 240, 240));
         jLabel2.setText("WelCome");
 
+        lblName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblName.setForeground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -122,7 +145,7 @@ public class ReceptionistPanel extends javax.swing.JFrame {
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabel2)
                                 .addGap(32, 32, 32)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(19, 19, 19))
@@ -142,7 +165,7 @@ public class ReceptionistPanel extends javax.swing.JFrame {
                         .addGap(58, 58, 58)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -159,6 +182,24 @@ public class ReceptionistPanel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBillActionPerformed
+       Billing lp=new Billing();
+        lp.setVisible(true);
+        this.dispose();     
+    }//GEN-LAST:event_btnBillActionPerformed
+
+    private void btnOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdersActionPerformed
+       ViewOrders lp=new ViewOrders();
+        lp.setVisible(true);
+        this.dispose();     
+    }//GEN-LAST:event_btnOrdersActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        LoginPanel lp=new LoginPanel();
+        lp.setVisible(true);
+        this.dispose();      // TODO add your handling code here:
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,9 +242,9 @@ public class ReceptionistPanel extends javax.swing.JFrame {
     private javax.swing.JButton btnOrders;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblName;
     // End of variables declaration//GEN-END:variables
 }

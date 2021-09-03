@@ -25,6 +25,8 @@ public class ViewALLEmployees extends javax.swing.JFrame {
      */
     public ViewALLEmployees() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
         veiw();
     }
 

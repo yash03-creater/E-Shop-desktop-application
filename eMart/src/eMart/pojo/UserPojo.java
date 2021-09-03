@@ -7,17 +7,17 @@ package eMart.pojo;
 
 
 public class UserPojo {
-   private String userId;
-   private String usertype;
+  static private String userId;
+ static  private String usertype;
    private String password;
    private String userName;
    private String empId;
 
-    public String getUserId() {
+    public static String getUserId() {
         return userId;
     }
 
-    public String getUsertype() {
+    public static String getUsertype() {
         return usertype;
     }
 

@@ -24,6 +24,8 @@ public class AddItem extends javax.swing.JFrame {
      */
     public AddItem() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
         loadId();
     }
 

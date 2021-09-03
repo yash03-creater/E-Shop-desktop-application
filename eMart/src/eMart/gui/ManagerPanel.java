@@ -17,6 +17,8 @@ public class ManagerPanel extends javax.swing.JFrame {
     UserPojo op=new UserPojo();
     public ManagerPanel() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
         lblName.setText(ProfilePojo.getUserName());
     }
 
@@ -141,7 +143,7 @@ public class ManagerPanel extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(28, 28, 28)
                 .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 0, 0));
@@ -168,6 +170,11 @@ public class ManagerPanel extends javax.swing.JFrame {
         btnMngStock.setBackground(new java.awt.Color(255, 102, 51));
         btnMngStock.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnMngStock.setText("Manage Stocks");
+        btnMngStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMngStockActionPerformed(evt);
+            }
+        });
 
         btnVeiwOrders.setBackground(new java.awt.Color(255, 102, 51));
         btnVeiwOrders.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -237,7 +244,7 @@ public class ManagerPanel extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -259,7 +266,9 @@ public class ManagerPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVeiwOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVeiwOrdersActionPerformed
-             // TODO add your handling code here:
+         ViewOrders lp=new ViewOrders();
+        lp.setVisible(true);
+        this.dispose();     
     }//GEN-LAST:event_btnVeiwOrdersActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -279,6 +288,12 @@ public class ManagerPanel extends javax.swing.JFrame {
         lp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMngRecptActionPerformed
+
+    private void btnMngStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMngStockActionPerformed
+       ManageStocks lp=new ManageStocks();
+        lp.setVisible(true);
+        this.dispose();     
+    }//GEN-LAST:event_btnMngStockActionPerformed
 
     /**
      * @param args the command line arguments

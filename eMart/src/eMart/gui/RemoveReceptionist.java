@@ -24,6 +24,8 @@ public class RemoveReceptionist extends javax.swing.JFrame {
      */
     public RemoveReceptionist() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
         loadId();
     }
 

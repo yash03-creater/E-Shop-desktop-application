@@ -26,6 +26,9 @@ public class VeiwItem extends javax.swing.JFrame {
      */
     public VeiwItem() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
+        this.setResizable(false);
         view();
     }
 
@@ -42,6 +45,7 @@ public class VeiwItem extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -70,12 +74,18 @@ public class VeiwItem extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel1.setText("View All Item");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(82, 82, 82)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnBack)
                 .addGap(126, 126, 126)
                 .addComponent(btnLogout)
@@ -89,6 +99,10 @@ public class VeiwItem extends javax.swing.JFrame {
                     .addComponent(btnLogout)
                     .addComponent(btnBack))
                 .addGap(363, 363, 363))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTable1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -118,7 +132,7 @@ public class VeiwItem extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(54, 54, 54))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,6 +214,7 @@ public class VeiwItem extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

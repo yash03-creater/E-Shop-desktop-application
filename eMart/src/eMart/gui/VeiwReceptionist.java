@@ -24,6 +24,8 @@ public class VeiwReceptionist extends javax.swing.JFrame {
     public VeiwReceptionist() {
        
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
          view();
     }
 

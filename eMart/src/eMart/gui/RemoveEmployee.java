@@ -26,6 +26,8 @@ public class RemoveEmployee extends javax.swing.JFrame {
      */
     public RemoveEmployee() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
         showEmpId();
     }
 
@@ -144,20 +146,18 @@ public class RemoveEmployee extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGap(143, 143, 143))
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(205, 205, 205))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(56, 56, 56)))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3))
+                            .addGap(119, 119, 119)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(188, 188, 188)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtName)
-                        .addComponent(jcEmpId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jcJob, javax.swing.GroupLayout.Alignment.LEADING, 0, 186, Short.MAX_VALUE)))
+                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jcEmpId, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jcJob, 0, 186, Short.MAX_VALUE))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -206,10 +206,10 @@ public class RemoveEmployee extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 4, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(338, 338, 338)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRemove)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(287, 287, 287))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,9 +220,9 @@ public class RemoveEmployee extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRemove)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

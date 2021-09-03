@@ -28,6 +28,8 @@ public class RemoveItem extends javax.swing.JFrame {
     DefaultTableModel tm;
     public RemoveItem() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
         view();
     }
 

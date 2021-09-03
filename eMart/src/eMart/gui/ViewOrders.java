@@ -5,6 +5,17 @@
  */
 package eMart.gui;
 
+import eMart.dao.OrdersDao;
+import eMart.pojo.ProductPojo;
+import eMart.pojo.UserPojo;
+import eMartD.DbUtil.MyConnection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Acer
@@ -16,6 +27,9 @@ public class ViewOrders extends javax.swing.JFrame {
      */
     public ViewOrders() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
+        jcShowId();
     }
 
     /**
@@ -31,14 +45,14 @@ public class ViewOrders extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jcOrdId = new javax.swing.JComboBox<>();
+        btnBack = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        btnShow = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,22 +69,32 @@ public class ViewOrders extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(240, 240, 240));
         jLabel2.setText("Select Order id");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jcOrdId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(240, 240, 240));
-        jButton1.setText("Back");
+        btnBack.setBackground(new java.awt.Color(255, 0, 0));
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(240, 240, 240));
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(255, 0, 0));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(240, 240, 240));
-        jButton2.setText("Logout");
+        btnLogout.setBackground(new java.awt.Color(255, 0, 0));
+        btnLogout.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(240, 240, 240));
+        btnLogout.setText("Logout");
 
-        jButton3.setBackground(new java.awt.Color(255, 0, 0));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(240, 240, 240));
-        jButton3.setText("Show");
+        btnShow.setBackground(new java.awt.Color(255, 0, 0));
+        btnShow.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnShow.setForeground(new java.awt.Color(240, 240, 240));
+        btnShow.setText("Show");
+        btnShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -80,17 +104,17 @@ public class ViewOrders extends javax.swing.JFrame {
                 .addGap(265, 265, 265)
                 .addComponent(jLabel2)
                 .addGap(41, 41, 41)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcOrdId, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jButton3)
+                .addComponent(btnShow)
                 .addContainerGap(291, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnBack)
                 .addGap(61, 61, 61)
-                .addComponent(jButton2)
+                .addComponent(btnLogout)
                 .addGap(23, 23, 23))
         );
         jPanel2Layout.setVerticalGroup(
@@ -99,16 +123,16 @@ public class ViewOrders extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton2)
+                        .addComponent(btnLogout)
                         .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnBack)
                         .addGap(1, 1, 1)))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(jcOrdId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnShow))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -126,8 +150,8 @@ public class ViewOrders extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(240, 240, 240));
         jLabel3.setText("Total:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(240, 240, 240));
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -144,8 +168,8 @@ public class ViewOrders extends javax.swing.JFrame {
                         .addGap(48, 48, 48))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -158,7 +182,7 @@ public class ViewOrders extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -179,6 +203,53 @@ public class ViewOrders extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
+       DefaultTableModel tm=(DefaultTableModel)jTable1.getModel();
+       tm.setRowCount(0);
+       String ordId=jcOrdId.getSelectedItem().toString().trim();
+        double total=0;
+        try {
+            ArrayList<ProductPojo>ar=OrdersDao.getorderDetails(ordId);
+            if(ar.isEmpty())
+            { 
+            JOptionPane.showMessageDialog(null, "empty");
+            return;
+            }
+            for(ProductPojo pp:ar)
+            {
+                Object rows[]=new Object[8];
+              rows[0]=pp.getProductId().trim();
+            rows[1]=pp.getProductName();
+            rows[2]=pp.getCompanyName();
+            rows[3]=pp.getProductPrice();
+            rows[4]=pp.getOurPrice();
+            rows[5]=pp.getQuantity();
+            rows[6]=pp.getTax()+"%";
+            rows[7]=(pp.getOurPrice()+(pp.getOurPrice()*pp.getTax()/100.0))*pp.getQuantity();
+            tm.addRow(rows);
+             total=total+((pp.getOurPrice()+(pp.getOurPrice()*pp.getTax()/100.0)))*pp.getQuantity();
+             lblTotal.setText(String.valueOf(total));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewOrders.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViewOrders.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnShowActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+    if(UserPojo.getUsertype().equals("Receptionist")){
+        ReceptionistPanel lp=new ReceptionistPanel();
+        lp.setVisible(true);
+        this.dispose(); }
+else
+{
+ManagerPanel lp=new ManagerPanel();
+        lp.setVisible(true);
+        this.dispose();     
+}
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,17 +287,45 @@ public class ViewOrders extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnShow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> jcOrdId;
+    private javax.swing.JLabel lblTotal;
     // End of variables declaration//GEN-END:variables
+ private void jcShowId() {
+        try {
+            ArrayList<String> ar=OrdersDao.getAllid();
+            jcOrdId.removeAllItems();
+            if(ar.isEmpty())
+                JOptionPane.showMessageDialog(null, "no employees available"); 
+       
+            for(String s:ar)
+            {
+            jcOrdId.addItem(s);
+            }
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "problem in backend"); 
+             ex.printStackTrace();
+            Logger.getLogger(UpdateEmploy.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {  
+             JOptionPane.showMessageDialog(null, "class not found"); 
+            Logger.getLogger(UpdateEmploy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          finally{
+           try {
+               MyConnection.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(UpdateEmploy.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           System.out.println("connection closed successfully");
+        }
+    }
 }

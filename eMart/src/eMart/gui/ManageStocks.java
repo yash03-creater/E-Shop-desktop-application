@@ -16,6 +16,8 @@ public class ManageStocks extends javax.swing.JFrame {
      */
     public ManageStocks() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
     }
 
     /**

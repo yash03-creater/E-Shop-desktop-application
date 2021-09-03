@@ -5,6 +5,7 @@
  */
 package eMart.gui;
 
+import eMart.dao.OrdersDao;
 import eMart.dao.ProductDao;
 import eMart.pojo.ProductPojo;
 import eMartD.DbUtil.MyConnection;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,13 +22,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Billing extends javax.swing.JFrame {
 DefaultTableModel tm;
+int q;
 ArrayList <ProductPojo>ar=new ArrayList<>();
+ArrayList <ProductPojo>ar2=new ArrayList<>();
+
+
+
     /**
      * Creates new form Billing
      */
 double total=0;
     public Billing() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
     }
 
     /**
@@ -132,6 +141,11 @@ double total=0;
         btnBill.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnBill.setForeground(new java.awt.Color(240, 240, 240));
         btnBill.setText("Generate Bill");
+        btnBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBillActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(240, 240, 240));
@@ -194,7 +208,10 @@ double total=0;
    String id=txtId.getText().trim();
     tm=(DefaultTableModel)jTable1.getModel();
      
-    
+    if(id.isEmpty())
+    {
+    JOptionPane.showMessageDialog(null, "Please enter proper input");
+    }
     int i,index=-1;
     try {
        
@@ -205,10 +222,19 @@ double total=0;
      index=i;
      }
      }
+     ProductPojo pp2=new ProductPojo();
         if(index==-1) 
         { 
             Object rows[]=new Object[8];
             ProductPojo pp=ProductDao.itemDetail(id);
+            if(pp==null)
+            {
+            JOptionPane.showMessageDialog(null, "No item present with this Product Id");
+            return;
+            }
+            pp2.setProductId(pp.getProductId());
+            pp2.setQuantity(pp.getQuantity());
+            ar2.add(pp2);
             rows[0]=pp.getProductId().trim();
             rows[1]=pp.getProductName();
             rows[2]=pp.getCompanyName();
@@ -218,6 +244,7 @@ double total=0;
             rows[6]=pp.getTax()+"%";
             rows[7]=pp.getOurPrice()+(pp.getOurPrice()*pp.getTax()/100.0);
             tm.addRow(rows);
+            pp.setQuantity(1);
              ar.add(pp);
              total=total+pp.getOurPrice()+(pp.getOurPrice()*pp.getTax()/100.0);
              lblTotal.setText(String.valueOf(total));
@@ -232,7 +259,8 @@ double total=0;
        tm.setValueAt(amount, index, 7);
          total=total+pp.getOurPrice()+(pp.getOurPrice()*pp.getTax()/100.0);
              lblTotal.setText(String.valueOf(total));
-        
+        pp.setQuantity(quantity);
+        q=q-1;
         
         }
     } catch (SQLException ex) {
@@ -261,6 +289,41 @@ ReceptionistPanel lp=new ReceptionistPanel();
         lp.setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBillActionPerformed
+     
+    try {
+      String  ordId = OrdersDao.getOrderId();
+         boolean res=OrdersDao.addOrder(ar, ordId.trim());
+         if(res)
+         {
+         JOptionPane.showMessageDialog(null, "order received");
+      int count=0;
+         for(ProductPojo pp:ar2)
+         {
+         pp.setQuantity(ar2.get(count).getQuantity()-  ar.get(count).getQuantity());
+         }
+         boolean res1=ProductDao.updateQuantity(ar2);
+         if(res1)
+         System.out.println("q reduced");
+         ViewOrders lp=new ViewOrders();
+        lp.setVisible(true);
+        this.dispose();       
+         }
+    } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "order received");
+        Logger.getLogger(Billing.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(Billing.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    finally{
+         try {
+             MyConnection.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(Billing.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    } 
+    }//GEN-LAST:event_btnBillActionPerformed
 
     /**
      * @param args the command line arguments

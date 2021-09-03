@@ -32,6 +32,8 @@ public class AddReceptionist extends javax.swing.JFrame {
       String rePwd;
     public AddReceptionist() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
         loadId();
     }
 

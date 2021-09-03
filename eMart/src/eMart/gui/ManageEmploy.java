@@ -16,6 +16,8 @@ public class ManageEmploy extends javax.swing.JFrame {
      */
     public ManageEmploy() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
     }
 
     /**

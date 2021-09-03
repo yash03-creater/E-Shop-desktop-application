@@ -92,7 +92,9 @@ Connection conn=MyConnection.getConnection();
 PreparedStatement ps=conn.prepareStatement("select *from products where AVAILABLE='y' and P_ID=?");
 ps.setString(1, id.trim());
 ResultSet rs=ps.executeQuery();
-rs.next();
+if(rs.next()==false) {
+    return null;
+       } 
 pp.setProductId(rs.getString(1));
 pp.setProductName(rs.getString(2));
 pp.setCompanyName(rs.getString(3));
@@ -101,5 +103,18 @@ pp.setOurPrice(rs.getInt(5));
 pp.setTax(rs.getInt(6));
 pp.setQuantity(rs.getInt(7));
 return pp;
+}
+public static boolean updateQuantity(ArrayList<ProductPojo>ar) throws SQLException, ClassNotFoundException
+{
+Connection conn=MyConnection.getConnection();
+     PreparedStatement ps=conn.prepareStatement("update  products set QUANTITY=? where P_ID=?");
+     int count=0;
+     for(ProductPojo pp:ar)
+     {
+     ps.setInt(1, pp.getQuantity());
+     ps.setString(2, pp.getProductId());
+     count=count+ps.executeUpdate();
+     }
+     return count==ar.size();
 }
 }

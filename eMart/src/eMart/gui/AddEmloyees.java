@@ -25,6 +25,7 @@ public class AddEmloyees extends javax.swing.JFrame {
     public AddEmloyees() {
         initComponents();
         this.setLocationRelativeTo(this);
+         this.setResizable(false);
          loadId();   
     }
 
